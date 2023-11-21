@@ -1,10 +1,6 @@
 import discord
 from discord.ext import commands
-import os,json
-
-
-with open("config.json",'r') as config_file:
-    config_datas = json.load(config_file)
+import os
 
 
 intents = discord.Intents.default()
@@ -14,8 +10,7 @@ client = discord.Client(intents=intents)
 
 reputation_dict = {}
 
-bot_prefix = config_datas["prefix"]
-token_config = config_datas["token"]
+bot_prefix = "§"
 
 @client.event
 async def on_ready():
@@ -66,7 +61,7 @@ async def on_message(message):
         
 
 try:
-  token = os.getenv("TOKEN") or token_config
+  token = os.getenv("DISCORD_TOKEN") or ""
   client.run(token)
 except discord.HTTPException as e:
     raise e
