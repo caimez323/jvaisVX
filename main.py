@@ -1,66 +1,79 @@
-import discord
-import os
+# This example requires the 'members' and 'message_content' privileged intents to function.
 
+import discord
+from discord.ext import commands
+import random,os
+
+description = '''An example bot to showcase the discord.ext.commands extension
+module.
+
+There are a number of utility commands being showcased here.'''
 
 intents = discord.Intents.default()
+intents.members = True
 intents.message_content = True
 
-client = discord.Client(intents=intents)
+bot = commands.Bot(command_prefix='?', description=description, intents=intents)
 
-reputation_dict = {}
 
-bot_prefix = "§"
-
-@client.event
+@bot.event
 async def on_ready():
-    print('We have logged in as {0.user}'.format(client))
+    print(f'Logged in as {bot.user} (ID: {bot.user.id})')
+    print('------')
 
 
-@client.event
-async def on_message(message):
-    if message.author == client.user:
+@bot.command()
+async def add(ctx, left: int, right: int):
+    """Adds two numbers together."""
+    await ctx.send(left + right)
+
+
+@bot.command()
+async def roll(ctx, dice: str):
+    """Rolls a dice in NdN format."""
+    try:
+        rolls, limit = map(int, dice.split('d'))
+    except Exception:
+        await ctx.send('Format has to be in NdN!')
         return
 
-    if message.content.startswith('https://twitter.com/'):
-        await message.channel.send(message.content.replace("https://twitter.com/","https://vxtwitter.com/"))
-
-    if message.content.startswith('https://x.com/'):
-        await message.channel.send(message.content.replace("https://x.com/","https://fixvx.com/"))
-    
-    if "//vxtwitter.com/" in message.content or  "//fixvx.com/" in message.content:
-        await message.add_reaction('♥')
-        message_author_name = message.author.name
-        await message.channel.send("Merci {} d'envoyer correctement tes messages twitter\n+1 de réputation".format(message_author_name))
-
-        if(message_author_name in reputation_dict):
-            reputation_dict[message_author_name]+=1
-        else:
-            reputation_dict[message_author_name]=1
-        
-
-    elif "vxtwitter" in message.content or "fixvx" in message.content:
-        await message.add_reaction('\N{THUMBS UP SIGN}')
+    result = ', '.join(str(random.randint(1, limit)) for r in range(rolls))
+    await ctx.send(result)
 
 
-    if message.content.startswith(bot_prefix):
+@bot.command(description='For when you wanna settle the score some other way')
+async def choose(ctx, *choices: str):
+    """Chooses between multiple choices."""
+    await ctx.send(random.choice(choices))
 
-        if message.content[1:] == "reputation":
-            if (not any(reputation_dict)):
-                await message.channel.send("Personne n'est dans le leaderboard pour le moment...")
-                return
-            buffer = ""
-            toCrown = True
-            for user,score in dict(sorted(reputation_dict.items(), key=lambda x:x[1])).items():
-                buffer += " | {}{} : {} |\n".format(":crown: " if toCrown else "",user,score)
-                if toCrown : toCrown = False
-            await message.channel.send(buffer)
-    
 
-    
-        
+@bot.command()
+async def repeat(ctx, times: int, content='repeating...'):
+    """Repeats a message multiple times."""
+    for i in range(times):
+        await ctx.send(content)
 
-try:
-  token = os.getenv("DISCORD_TOKEN") or ""
-  client.run(token)
-except discord.HTTPException as e:
-    raise e
+
+@bot.command()
+async def joined(ctx, member: discord.Member):
+    """Says when a member joined."""
+    await ctx.send(f'{member.name} joined {discord.utils.format_dt(member.joined_at)}')
+
+
+@bot.group()
+async def cool(ctx):
+    """Says if a user is cool.
+
+    In reality this just checks if a subcommand is being invoked.
+    """
+    if ctx.invoked_subcommand is None:
+        await ctx.send(f'No, {ctx.subcommand_passed} is not cool')
+
+
+@cool.command(name='bot')
+async def _bot(ctx):
+    """Is the bot cool?"""
+    await ctx.send('Yes, the bot is cool.')
+
+
+bot.run(os.getenv("DISCORD_TOKEN"))
