@@ -21,10 +21,10 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    if message.content.startswith('https://twitter.com/'):
+    if ('https://twitter.com/') in message.content :
         await message.channel.send(message.content.replace("https://twitter.com/","https://vxtwitter.com/"))
 
-    if message.content.startswith('https://x.com/'):
+    if ('https://x.com/') in message.content:
         await message.channel.send(message.content.replace("https://x.com/","https://fixvx.com/"))
     
     if "//vxtwitter.com/" in message.content or  "//fixvx.com/" in message.content:
