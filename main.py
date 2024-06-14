@@ -1,10 +1,12 @@
 import discord
 import os
-
+import random
 
 intents = discord.Intents.default()
 intents.message_content = True
 
+emojiList = [":muscle:",":thumbsup:",":punch:",":fist:",":left_facing_fist:",":right_facing_fist:",":ok_hand:",":call_me:",":index_pointing_at_the_viewer:",":mecanical_arm:",":leg:",":clap:",":handshake:",":sunglasses:"]
+triggerWordMailleList = ["gros","grosse","maille","muscle", "musclé","maillon","biceps","abos","fort","force"]
 client = discord.Client(intents=intents)
 
 reputation_dict = {}
@@ -41,6 +43,9 @@ async def on_message(message):
     elif "vxtwitter" in message.content or "fixvx" in message.content:
         await message.add_reaction('\N{THUMBS UP SIGN}')
 
+    if any(word in message.content for word in triggerWordMailleList) or any(word in str(message.content).lower() for word in triggerWordMailleList):
+        await message.reply("Grosse Maille {}".format(random.choice(emojiList)),mention_author=False)
+
 
     if message.content.startswith(bot_prefix):
 
@@ -54,10 +59,7 @@ async def on_message(message):
                 buffer += " | {}{} : {} |\n".format(":crown: " if toCrown else "",user,score)
                 if toCrown : toCrown = False
             await message.channel.send(buffer)
-    
-
-    
-        
+           
 
 try:
   token = os.getenv("DISCORD_TOKEN") or ""
