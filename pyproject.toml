@@ -2,7 +2,7 @@
 name = "python-template"
 version = "0.1.0"
 description = ""
-authors = ["Your Name <you@example.com>"]
+authors = ["caimez <caimezae@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = ">=3.10.0,<3.11"
@@ -20,3 +20,6 @@ ignore = ['W291', 'W292', 'W293']
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[phases.setup]
+pkgs = ["python310"]
