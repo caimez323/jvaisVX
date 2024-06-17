@@ -5,7 +5,7 @@ import random
 intents = discord.Intents.default()
 intents.message_content = True
 
-emojiList = [":muscle:",":thumbsup:",":punch:",":fist:",":left_facing_fist:",":right_facing_fist:",":ok_hand:",":call_me:",":index_pointing_at_the_viewer:",":mecanical_arm:",":leg:",":clap:",":handshake:",":sunglasses:"]
+emojiList = [":muscle:",":thumbsup:",":punch:",":fist:",":left_facing_fist:",":right_facing_fist:",":ok_hand:",":call_me:",":index_pointing_at_the_viewer:",":mechanical_arm:",":leg:",":clap:",":handshake:",":sunglasses:"]
 triggerWordMailleList = ["gros","grosse","maille","muscle", "musclé","maillon","biceps","abos","fort","force"]
 client = discord.Client(intents=intents)
 
