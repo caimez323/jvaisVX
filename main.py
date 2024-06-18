@@ -7,6 +7,9 @@ intents.message_content = True
 
 emojiList = [":muscle:",":thumbsup:",":punch:",":fist:",":left_facing_fist:",":right_facing_fist:",":ok_hand:",":call_me:",":index_pointing_at_the_viewer:",":mechanical_arm:",":leg:",":clap:",":handshake:",":sunglasses:"]
 triggerWordMailleList = ["gros","grosse","maille","muscle", "musclé","maillon","biceps","abdos","fort","force"]
+mailleIncrement = ["Double" , "Triple", "Quadruple","Quintuple","Sextuple","Septuple","Octuple","Nonuple","Décuple","Impressionnante","Épique","Dévastatrice","Brutale","Imprévisible","Soudaine","Fulgurante","Impeccable","Dominatrice","Inarrêtable"]
+
+
 client = discord.Client(intents=intents)
 
 reputation_dict = {}
