@@ -43,7 +43,7 @@ async def on_message(message):
     elif "vxtwitter" in message.content or "fixvx" in message.content:
         await message.add_reaction('\N{THUMBS UP SIGN}')
 
-    if any(word in message.content for word in triggerWordMailleList) or any(word in str(message.content).lower() for word in triggerWordMailleList):
+    if any(word in str(message.content) for word in triggerWordMailleList) or any(word in str(message.content).lower() for word in triggerWordMailleList):
         await message.reply("Grosse Maille {}".format(random.choice(emojiList)),mention_author=False)
 
 
