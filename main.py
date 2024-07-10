@@ -30,15 +30,16 @@ async def on_message(message):
         return
 
     if ('https://twitter.com/') in message.content :
-        await message.channel.send(message.content.replace("https://twitter.com/","https://vxtwitter.com/"))
+        await message.channel.send(message.content.replace("https://twitter.com/","https://vxtwitter.com/") + " (" + message.author.name + ")")
+        await message.delete()
 
     if ('https://x.com/') in message.content:
-        await message.channel.send(message.content.replace("https://x.com/","https://fixvx.com/"))
+        await message.channel.send(message.content.replace("https://x.com/","https://fixvx.com/") + " (" + message.author.name + ")")
+        await message.delete()
     
     if "//vxtwitter.com/" in message.content or  "//fixvx.com/" in message.content:
         await message.add_reaction('♥')
         message_author_name = message.author.name
-        await message.channel.send("Merci {} d'envoyer correctement tes messages twitter\n+1 de réputation".format(message_author_name))
 
         if(message_author_name in reputation_dict):
             reputation_dict[message_author_name]+=1
