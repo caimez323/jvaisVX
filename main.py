@@ -68,7 +68,7 @@ async def on_message(message):
         await asyncio.sleep(random.uniform(2,8))
         botMessage = await message.channel.send(f'Hey {message.author.mention}')
         await asyncio.sleep(1)
-        botMessage.delete()
+        await botMessage.delete()
 
     if message.content.startswith(bot_prefix):
 
