@@ -63,10 +63,8 @@ async def on_message(message):
             mailleCombo+=1
         
         await message.reply("{}Grosse Maille {}".format((mailleIncrement[mailleCombo]+(" " if mailleCombo!= 0 else "")),random.choice(emojiList)),mention_author=False)
-
-    if "YF37" in str(message.content) :
-        await asyncio.sleep(random.uniform(2,8))
-        botMessage = await message.channel.send(f'Hey {message.author.mention}')
+        await asyncio.sleep(random.uniform(12,125))
+        botMessage = await message.channel.send(f'{message.author.mention}')
         await asyncio.sleep(1)
         await botMessage.delete()
 
