@@ -30,11 +30,11 @@ async def on_message(message):
         await message.channel.send(message.content.replace("https://x.com/","https://fixvx.com/") + " (" + message.author.name + ")")
         await message.delete()
         
-    if ("http://instagram.com/") in message.content:
-        await message.channel.send(message.content.replace("http://intsagram.com/","http://ddinstagram.com/") + " (" + message.author.name + ")")
+    if ("https://instagram.com/") in message.content:
+        await message.channel.send(message.content.replace("https://instagram.com/","https://ddinstagram.com/") + " (" + message.author.name + ")")
         await message.delete()
         
-    if "//vxtwitter.com/" in message.content or  "//fixvx.com/" in message.content or "http://ddinstagram.com/" in message.content:
+    if "//vxtwitter.com/" in message.content or  "//fixvx.com/" in message.content or "https://ddinstagram.com/" in message.content:
         await message.add_reaction('♥')
         message_author_name = message.author.name
 
