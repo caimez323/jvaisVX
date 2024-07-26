@@ -30,8 +30,8 @@ async def on_message(message):
         await message.channel.send(message.content.replace("https://x.com/","https://fixvx.com/") + " (" + message.author.name + ")")
         await message.delete()
         
-    if ("https://instagram.com/") in message.content:
-        await message.channel.send(message.content.replace("https://instagram.com/","https://ddinstagram.com/") + " (" + message.author.name + ")")
+    if ("https://www.instagram.com/") in message.content:
+        await message.channel.send(message.content.replace("https://www.instagram.com/","https://www.ddinstagram.com/") + " (" + message.author.name + ")")
         await message.delete()
         
     if "//vxtwitter.com/" in message.content or  "//fixvx.com/" in message.content or "https://ddinstagram.com/" in message.content:
