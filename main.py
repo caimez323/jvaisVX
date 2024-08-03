@@ -1,7 +1,7 @@
 import discord
 import os
 
-class WordCheckerBot(discord.Client):
+class VXBot(discord.Client):
     def __init__(self, intents=None):
         super().__init__(intents=intents)
         self.reputation_dict = {}
@@ -55,7 +55,7 @@ class WordCheckerBot(discord.Client):
 if __name__ == "__main__":
     intents = discord.Intents.default()
     intents.message_content = True
-    bot = WordCheckerBot(intents=intents)
+    bot = VXBot(intents=intents)
 
     try:
         token = os.getenv("DISCORD_TOKEN") or ""
