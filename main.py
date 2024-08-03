@@ -2,7 +2,7 @@
 reputation_dict = {}
 bot_prefix = "§"
 
-async def vxBot(message):
+async def VXBot(message):
 
     if ('https://twitter.com/') in message.content :
         await message.channel.send(message.content.replace("https://twitter.com/","https://vxtwitter.com/") + " (" + message.author.name + ")")
