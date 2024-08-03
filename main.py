@@ -1,24 +1,8 @@
-import discord
-import os
-
-intents = discord.Intents.default()
-intents.message_content = True
-
-client = discord.Client(intents=intents)
 
 reputation_dict = {}
-
 bot_prefix = "§"
 
-@client.event
-async def on_ready():
-    print('We have logged in as {0.user}'.format(client))
-
-
-@client.event
-async def on_message(message):
-    if message.author == client.user:
-        return
+async def vxBot(message):
 
     if ('https://twitter.com/') in message.content :
         await message.channel.send(message.content.replace("https://twitter.com/","https://vxtwitter.com/") + " (" + message.author.name + ")")
@@ -56,10 +40,4 @@ async def on_message(message):
                 buffer += " | {}{} : {} |\n".format(":crown: " if toCrown else "",user,score)
                 if toCrown : toCrown = False
             await message.channel.send(buffer)
-           
-
-try:
-  token = os.getenv("DISCORD_TOKEN") or ""
-  client.run(token)
-except discord.HTTPException as e:
-    raise e
+        
